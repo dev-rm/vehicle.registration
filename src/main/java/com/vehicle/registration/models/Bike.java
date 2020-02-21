@@ -3,13 +3,39 @@ package com.vehicle.registration.models;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Bike {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
 	private String name;
 	private String email;
 	private String phone;
 	private String model;
 	private String serialNumber;
-	private BigDecimal purcharePrice;
+	private BigDecimal purchasePrice;
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
+	private Date purchaseDate;
+	private boolean contact;
+	
 	public String getName() {
 		return name;
 	}
@@ -40,11 +66,11 @@ public class Bike {
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
-	public BigDecimal getPurcharePrice() {
-		return purcharePrice;
+	public BigDecimal getPurchasePrice() {
+		return purchasePrice;
 	}
-	public void setPurcharePrice(BigDecimal purcharePrice) {
-		this.purcharePrice = purcharePrice;
+	public void setPurchasePrice(BigDecimal purcharePrice) {
+		this.purchasePrice = purcharePrice;
 	}
 	public Date getPurchaseDate() {
 		return purchaseDate;
@@ -58,7 +84,4 @@ public class Bike {
 	public void setContact(boolean contact) {
 		this.contact = contact;
 	}
-	private Date purchaseDate;
-	private boolean contact;
-
 }
